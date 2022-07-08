@@ -420,27 +420,33 @@ odoo.define("minecraft_tellraw_field.minecraft_tellraw_field", function (require
       this.lastValue = undefined;
     }
     mounted() {
-      $("table tbody").sortable({
-        handle: "span.o_row_handle",
-        cancel: "",
-        start: (e, ui) => {
-          $(this).attr("data-previndex", ui.item.index());
-        },
-        update: (e, ui) => {
-          const oldIndex = $(this).attr("data-previndex");
-          const newIndex = ui.item.index();
-          $(this).removeAttr("data-previndex");
-          this._updateIndex(oldIndex + 1, newIndex + 1);
-        },
-      });
+      $(this.el)
+        .find("table tbody.dropdown-values")
+        .sortable({
+          handle: "span.o_row_handle",
+          cancel: "",
+          start: (e, ui) => {
+            $(this).attr("data-previndex", ui.item.index());
+          },
+          update: (e, ui) => {
+            const oldIndex = $(this).attr("data-previndex");
+            const newIndex = ui.item.index();
+            $(this).removeAttr("data-previndex");
+            this._updateIndex(oldIndex + 1, newIndex + 1);
+          },
+        });
     }
     patched() {
       this._generateText();
       const val = {values: this.state.values};
+      // Grepper js compare objects
       const isEqual = (...objects) =>
         objects.every((obj) => JSON.stringify(obj) === JSON.stringify(objects[0]));
       if (!isEqual(this.lastValue, val)) {
+        // End grepper
+        // grepper odoo field set value
         this._setValue(val);
+        // End grepper
         this.lastValue = val;
       }
     }

@@ -19,7 +19,7 @@
                                 <th scope="col">Remove</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="dropdown-values">
                             <t t-foreach="state.values" t-as="value_key">
                                 <t t-if="value_key_index !== 0">
                                     <tr>
@@ -33,6 +33,7 @@
                         t-on-click="onClickEditText(value_key_index)"
                       >Edit</button></td>
                                         <td><button
+                        t-if="!value_key.listitem"
                         t-on-click="onClickRemoveText(value_key_index)"
                       >Remove</button></td>
                                     </tr>
@@ -99,6 +100,7 @@
             t-on-change="onChangeText"
             t-att-value="state.value.text"
           />
+                    <strong t-esc="state.params" />
                 </div>
             </div>
         </div>
@@ -367,6 +369,7 @@
                     </div>
                 </t>
             </div>
+            <!--grepper owl dialog buttons-->
             <t t-set-slot="buttons">
                 <button
           class="o-reject btn btn-primary"
@@ -377,6 +380,7 @@
           t-on-click="onClickCancel"
         >Cancel</button>
             </t>
+            <!--end grepper-->
         </Dialog>
         <t t-if="state.minecraftTellrawHoverEventTextDialog">
             <MinecraftTellrawHoverEventTextDialog
@@ -387,6 +391,7 @@
         </t>
     </t>
 
+    <!-- grepper odoo owl dialog template -->
     <t t-name="MinecraftTellrawHoverEventTextDialog" owl="1">
         <Dialog
       contentClass="'o_MinecraftTellrawHoverEventTextDialog'"
@@ -407,5 +412,6 @@
             </t>
         </Dialog>
     </t>
+    <!-- end grepper -->
 
 </templates>
