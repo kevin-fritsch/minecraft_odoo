@@ -20,7 +20,7 @@
                             </tr>
                             </thead>
                             <tbody class="dropdown-values">
-                            <t t-foreach="state.values" t-as="value_key">
+                            <t t-foreach="state.values" t-as="value_key" t-key="key">
                                 <t t-if="value_key_index !== 0">
                                     <tr>
                                         <td><span
@@ -44,30 +44,33 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button
-              class="btn btn-primary dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-                            Add Text
-                        </button>
-                        <div
-              class="dropdown-menu"
-              aria-labelledby="dropdownMenuLink"
-              id="add-text-dropdown"
-            >
+                        <div class="dropdown">
                             <button
-                class="dropdown-item"
-                name="text"
-                t-on-click="openText"
-              >Text</button>
-                            <button
-                class="dropdown-item"
-                name="lineBreak"
-                t-on-click="openLineBreak"
-              >Line Break</button>
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                id="dropdownMenuLink"
+              >
+                                Add Text
+                            </button>
+                            <div
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuLink"
+                id="add-text-dropdown"
+              >
+                                <button
+                  class="dropdown-item"
+                  name="text"
+                  t-on-click="openText"
+                >Text</button>
+                                <button
+                  class="dropdown-item"
+                  name="lineBreak"
+                  t-on-click="openLineBreak"
+                >Line Break</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -288,12 +291,12 @@
     </t>
 
     <t t-name="FieldMinecraftTellrawText" owl="1">
+        <div id="tellrawDialogRef" t-ref="dialog">
         <Dialog
-      contentClass="'o_MinecraftTellrawDialog'"
-      title="AddText"
-      size="'large'"
-      t-ref="dialog"
-    >
+        contentClass="'o_MinecraftTellrawDialog'"
+        title="AddText"
+        size="'large'"
+      >
             <t t-call="MinecraftTellrawText" />
             <hr />
             <h2>Click Event:</h2>
@@ -301,12 +304,12 @@
                 <div class="col">
                     <div class="form-group">
                         <select
-              class="form-control"
-              id="click-event"
-              name="click-event"
-              t-on-change="onChangeClickEvent"
-              t-att-value="state.clickEvent || 'none'"
-            >
+                class="form-control"
+                id="click-event"
+                name="click-event"
+                t-on-change="onChangeClickEvent"
+                t-att-value="state.clickEvent || 'none'"
+              >
                             <option value="none">None</option>
                             <option value="open_url">Open URL</option>
                             <option value="run_command">Run Command</option>
@@ -319,12 +322,12 @@
                     <div class="col-6">
                         <div class="form-group">
                             <input
-                type="text"
-                class="form-control"
-                t-att-name="state.clickEvent"
-                t-att-value="state.value.clickEvent &amp;&amp; state.value.clickEvent.value  || ''"
-                t-on-change="onChangeClickEventValue"
-              />
+                  type="text"
+                  class="form-control"
+                  t-att-name="state.clickEvent"
+                  t-att-value="state.value.clickEvent &amp;&amp; state.value.clickEvent.value  || ''"
+                  t-on-change="onChangeClickEventValue"
+                />
                         </div>
                     </div>
                 </t>
@@ -335,12 +338,12 @@
                 <div class="col">
                     <div class="form-group">
                         <select
-              class="form-control"
-              id="hover-event"
-              name="hover-event"
-              t-on-change="onChangeHoverEvent"
-              t-att-value="state.hoverEvent || 'none'"
-            >
+                class="form-control"
+                id="hover-event"
+                name="hover-event"
+                t-on-change="onChangeHoverEvent"
+                t-att-value="state.hoverEvent || 'none'"
+              >
                             <option value="none">None</option>
                             <option value="show_entity">Show Entity</option>
                             <option value="show_item">Show Item</option>
@@ -359,12 +362,12 @@
                     <div class="col-6">
                         <div class="form-group">
                             <input
-                type="text"
-                class="form-control"
-                t-att-name="state.hoverEvent"
-                t-att-value="state.value.hoverEvent &amp;&amp; state.value.hoverEvent.value || ''"
-                t-on-change="onChangeHoverEventValue"
-              />
+                  type="text"
+                  class="form-control"
+                  t-att-name="state.hoverEvent"
+                  t-att-value="state.value.hoverEvent &amp;&amp; state.value.hoverEvent.value || ''"
+                  t-on-change="onChangeHoverEventValue"
+                />
                         </div>
                     </div>
                 </t>
@@ -372,16 +375,16 @@
             <!--grepper owl dialog buttons-->
             <t t-set-slot="buttons">
                 <button
-          class="o-reject btn btn-primary"
-          t-on-click="onClickSave"
-        >Save</button>
+            class="o-reject btn btn-primary"
+            t-on-click="onClickSave"
+          >Save</button>
                 <button
-          class="o-cancel btn btn-secondary"
-          t-on-click="onClickCancel"
-        >Cancel</button>
+            class="o-cancel btn btn-secondary"
+            t-on-click="onClickCancel"
+          >Cancel</button>
             </t>
             <!--end grepper-->
-        </Dialog>
+        </Dialog></div>
         <t t-if="state.minecraftTellrawHoverEventTextDialog">
             <MinecraftTellrawHoverEventTextDialog
         index="state.index"
@@ -393,24 +396,24 @@
 
     <!-- grepper odoo owl dialog template -->
     <t t-name="MinecraftTellrawHoverEventTextDialog" owl="1">
+        <div id="eventTextDialogRef" t-ref="newDialog">
         <Dialog
-      contentClass="'o_MinecraftTellrawHoverEventTextDialog'"
-      title="AddText"
-      size="'large'"
-      t-ref="newDialog"
-    >
+        contentClass="'o_MinecraftTellrawHoverEventTextDialog'"
+        title="AddText"
+        size="'large'"
+      >
             <t t-call="MinecraftTellrawText" />
             <t t-set-slot="buttons">
                 <button
-          class="o-reject btn btn-primary"
-          t-on-click="onClickSave"
-        >Save</button>
+            class="o-reject btn btn-primary"
+            t-on-click="onClickSave"
+          >Save</button>
                 <button
-          class="o-cancel btn btn-secondary"
-          t-on-click="onClickCancel"
-        >Cancel</button>
+            class="o-cancel btn btn-secondary"
+            t-on-click="onClickCancel"
+          >Cancel</button>
             </t>
-        </Dialog>
+        </Dialog></div>
     </t>
     <!-- end grepper -->
 
