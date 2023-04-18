@@ -1,0 +1,9 @@
+diff a/.pre-commit-config.yaml b/.pre-commit-config.yaml	(rejected hunks)
+@@ -41,5 +35,5 @@ repos:
+       - id: oca-fix-manifest-website
+-        args: ["https://github.com/OdooAI/odooai"]
++        args: ["https://GigaClub.net/"]
+   - repo: https://github.com/myint/autoflake
+-    rev: v1.6.1
++    rev: v1.4
+     hooks:

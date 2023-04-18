@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+minecraft_tellraw_line_group_user,minecraft_tellraw_line_group_user,model_minecraft_tellraw_line,base.group_user,1,1,1,1
+minecraft_tellraw_line_group_portal,minecraft_tellraw_line_group_portal,model_minecraft_tellraw_line,base.group_portal,1,1,1,1
